@@ -1,6 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Altimaps",
+	"author": "Jeremie Primas",
 	"version": "1.0.0",
 	"description": "Display Google Maps altitude on Google Street View",
 	"icons": {
