@@ -1,0 +1,22 @@
+{
+  "name": "altimaps",
+  "version": "1.0.0",
+  "description": "Display Google Maps altitude on Google Street View",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeremiePr/altimaps.git"
+  },
+  "author": "Jeremie Primas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeremiePr/altimaps/issues"
+  },
+  "homepage": "https://github.com/JeremiePr/altimaps#readme",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}

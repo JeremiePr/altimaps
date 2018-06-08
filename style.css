@@ -1,0 +1,15 @@
+#am-altitude-container {
+	position: fixed;
+	top: 8px;
+	left: 305px;
+	height: 20px;
+	width: 80px;
+	text-align: center;
+	background: rgba(34, 34, 34, .8);
+	line-height: 20px;
+}
+
+#am-altitude-container > p {
+	color: #CCC;
+	font-size: 11px;
+}

@@ -1,0 +1,25 @@
+{
+	"manifest_version": 2,
+	"name": "Altimaps",
+	"version": "1.0.0",
+	"description": "Display Google Maps altitude on Google Street View",
+	"icons": {
+		"128": "app_icon.png"
+	},
+	"background": {
+		"scripts": ["node_modules/jquery/dist/jquery.min.js", "background.js"]
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://www.google.com/maps/*"],
+			"js": ["script.js"],
+			"css": ["style.css"]
+		}
+	],
+	"permissions": [
+		"webRequest",
+		"webRequestBlocking",
+		"tabs",
+		"<all_urls>"
+	]
+}
