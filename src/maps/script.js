@@ -15,9 +15,9 @@ function setAltitude(altitude) {
 
 /**
  * Function called on message received by the extension
- * @param {*} message sent by the extension
- * @param {*} sender identifies the message sender
- * @param {*} sendResponse callback to notify the extension
+ * @param message sent by the extension
+ * @param sender identifies the message sender
+ * @param sendResponse callback to notify the extension
  */
 function onMessage(message, sender, sendResponse) {
 	if(message.origin && message.value && message.origin === "AltiMaps") {
@@ -42,7 +42,7 @@ function main() {
 	// Inject the extension element inside the DOM body
 	document.body.innerHTML += `<div id="am-altitude-container"><p></p></div>`;
 	// Create a listener that trigger a callback function on message received
-	chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-		onMessage()
-	});
+	chrome.runtime.onMessage.addListener(onMessage);
 }
+
+main();

@@ -8,13 +8,13 @@
 		"128": "app_icon.png"
 	},
 	"background": {
-		"scripts": ["node_modules/jquery/dist/jquery.min.js", "background.js"]
+		"scripts": ["./node_modules/jquery/dist/jquery.min.js", "./src/background.js"]
 	},
 	"content_scripts": [
 		{
 			"matches": ["https://www.google.com/maps/*"],
-			"js": ["script.js"],
-			"css": ["style.css"]
+			"js": ["./src/maps/script.js"],
+			"css": ["./src/maps/style.css"]
 		}
 	],
 	"permissions": [
