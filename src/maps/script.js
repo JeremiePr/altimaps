@@ -5,12 +5,34 @@
  */
 
 
+let htmlInjected = false;
+
 /**
  * Function that injects the altitude value in the DOM container element
  * @param altitude formatted altitude to inject in the DOM 
  */
 function setAltitude(altitude) {
-	document.querySelector("#am-altitude-container > p").innerHTML = `${altitude}m`;
+    if(htmlInjected) {
+        document.querySelector("#am-altitude").innerHTML = `${altitude}m`;
+    }
+    else {
+        let refNode = document.querySelector("#fineprint-terms");
+        if(refNode !== null) {
+            refNode.insertAdjacentHTML("afterEnd", `<p id="am-altitude" class="fineprint-item fineprint-padded noprint"></p>`);
+            htmlInjected = true;
+        }
+    }
+}
+
+/**
+ * Function that removes the container that displays the altitude
+ */
+function removeAltitude() {
+    let node = document.querySelector("#am-altitude");
+    if(node !== null) {
+        node.remove();
+        htmlInjected = false;
+    }
 }
 
 /**
@@ -20,29 +42,22 @@ function setAltitude(altitude) {
  * @param sendResponse callback to notify the extension
  */
 function onMessage(message, sender, sendResponse) {
-	if(message.origin && message.value && message.origin === "AltiMaps") {
-		setAltitude(message.value);
-		sendResponse({
-			origin: message.origin,
-			value: "Success"
-		});
+	if(message.mode && message.value && message.mode === "Street_View") {
+        setAltitude(message.value);
+        sendResponse("Street View");
 	}
 	else {
-		sendResponse({
-			origin: "AltiMaps",
-			value: "Error: Arguments missing"
-		});
-	}
+        removeAltitude();
+        sendResponse("Maps");
+    }
 }
 
 /**
  * Entry function
  */
 function main() {
-	// Inject the extension element inside the DOM body
-	document.body.innerHTML += `<div id="am-altitude-container"><p></p></div>`;
 	// Create a listener that trigger a callback function on message received
-	chrome.runtime.onMessage.addListener(onMessage);
+    chrome.runtime.onMessage.addListener(onMessage);
 }
 
 main();

@@ -7,10 +7,10 @@
 /* Injected extension element container */
 #am-altitude-container {
 	position: fixed;
-	top: 8px;
-	left: 305px;
+	bottom: 20px;
+	left: 265px;
 	height: 20px;
-	width: 80px;
+	width: 60px;
 	text-align: center;
 	background: rgba(34, 34, 34, .8);
 	line-height: 20px;

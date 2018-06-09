@@ -12,7 +12,7 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["https://www.google.com/maps/*"],
+			"matches": ["https://www.google.com/maps/*", "https://www.google.fr/maps/*"],
 			"js": ["./src/maps/script.js"],
 			"css": ["./src/maps/style.css"]
 		}

@@ -8,26 +8,53 @@
 // Store the last request URL called
 let url = "";
 
+// Locked boolean to prevent too many calls to be fired
+let locked = false;
+
 // Create a listener that intercepts HTTP request calls with URLs that match the following pattern
 chrome.webRequest.onBeforeRequest.addListener(req => {
-	// Prevent from calling again the same request
-	if(req.url !== url) {
-		url = req.url;
-		// Calls the server with the request made by the page
-		$.ajax({
-			url: url,
-			data: null,
-			dataType: "text",
-			success: onRequestSuccess,
-			error: onRequestError
-		});
-		$.get(url, {}, res => {
-			console.log(res);
-		});
-	}
+
+    if(req.url.includes("/maps/photometa/v1")) {
+        if (!locked && url !== req.url) {
+            // Lock access...
+            locked = true;
+            // ...for one second
+            setTimeout(() => { locked = false }, 1000);
+            // Update the URL
+            url = req.url;
+            // Calls the server with the request made by the page
+            $.ajax({
+                url: url,
+                data: null,
+                dataType: "text",
+                success: onRequestSuccess,
+                error: onRequestError
+            });
+        }
+    }
+    else {
+        cancelAltitude();
+    }
+	
 }, {
-	urls: ["https://www.google.com/maps/photometa/v1*"]
-});
+	urls: [
+        "https://www.google.com/maps/photometa/v1*",
+        "https://www.google.fr/maps/photometa/v1*",
+        "https://www.google.com/maps/vt/*",
+        "https://www.google.fr/maps/vt/*"
+    ],
+}, ["blocking"]);
+
+function cancelAltitude() {
+    chrome.tabs.query({
+        active: true
+    }, tabs => {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            mode: "Maps",
+            value: null
+        });
+    });
+}
 
 /**
  * Function called on request success
@@ -39,7 +66,7 @@ function onRequestSuccess(res) {
 		active: true
 	}, tabs => {
 		chrome.tabs.sendMessage(tabs[0].id, {
-			origin: "AltiMaps",
+            mode: "Street_View",
 			value: altitude
 		});
 	});
