@@ -52,12 +52,4 @@ function onMessage(message, sender, sendResponse) {
     }
 }
 
-/**
- * Entry function
- */
-function main() {
-	// Create a listener that trigger a callback function on message received
-    chrome.runtime.onMessage.addListener(onMessage);
-}
-
-main();
+chrome.runtime.onMessage.addListener(onMessage);

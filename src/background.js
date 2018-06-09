@@ -47,7 +47,8 @@ chrome.webRequest.onBeforeRequest.addListener(req => {
 
 function cancelAltitude() {
     chrome.tabs.query({
-        active: true
+        active: true,
+        lastFocusedWindow: true
     }, tabs => {
         chrome.tabs.sendMessage(tabs[0].id, {
             mode: "Maps",
@@ -63,7 +64,8 @@ function cancelAltitude() {
 function onRequestSuccess(res) {
 	let altitude = getAltitude(res);
 	chrome.tabs.query({
-		active: true
+        active: true,
+        lastFocusedWindow: true
 	}, tabs => {
 		chrome.tabs.sendMessage(tabs[0].id, {
             mode: "Street_View",
