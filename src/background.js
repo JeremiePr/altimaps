@@ -32,7 +32,8 @@ chrome.webRequest.onBeforeRequest.addListener(req => {
             });
         }
     }
-    else {
+    // the following string is contained only in 
+    else if (!req.url.includes("2sspotlight!")) {
         cancelAltitude();
     }
 	
