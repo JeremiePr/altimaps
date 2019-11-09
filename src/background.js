@@ -41,8 +41,10 @@ chrome.webRequest.onBeforeRequest.addListener(req => {
 	urls: [
         "https://www.google.com/maps/photometa/v1*",
         "https://www.google.fr/maps/photometa/v1*",
+        "https://www.google.ch/maps/photometa/v1*",
         "https://www.google.com/maps/vt/*",
-        "https://www.google.fr/maps/vt/*"
+        "https://www.google.fr/maps/vt/*",
+        "https://www.google.ch/maps/vt/*"
     ],
 }, ["blocking"]);
 
@@ -66,12 +68,14 @@ function onRequestSuccess(res) {
 	let altitude = getAltitude(res);
 	chrome.tabs.query({
         active: true,
-        lastFocusedWindow: true
+        currentWindow: true
 	}, tabs => {
-		chrome.tabs.sendMessage(tabs[0].id, {
-            mode: "Street_View",
-			value: altitude
-		});
+        if (tabs && tabs[0]) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                mode: "Street_View",
+                value: altitude
+            });
+        }
 	});
 }
 

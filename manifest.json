@@ -1,4 +1,7 @@
 {
+	"background": {
+        "scripts": ["./node_modules/jquery/dist/jquery.min.js", "./src/background.js"]
+    },
 	"manifest_version": 2,
 	"name": "Altimaps",
 	"author": "Jeremie Primas",
@@ -7,12 +10,9 @@
 	"icons": {
 		"128": "app_icon.png"
 	},
-	"background": {
-		"scripts": ["./node_modules/jquery/dist/jquery.min.js", "./src/background.js"]
-	},
 	"content_scripts": [
 		{
-			"matches": ["https://www.google.com/maps/*", "https://www.google.fr/maps/*"],
+			"matches": ["https://www.google.com/maps/*", "https://www.google.fr/maps/*", "https://www.google.ch/maps/*"],
 			"js": ["./src/maps/script.js"],
 			"css": ["./src/maps/style.css"]
 		}
