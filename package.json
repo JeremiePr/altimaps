@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/JeremiePr/altimaps#readme",
   "dependencies": {
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "npm": "^6.11.3"
   }
 }
