@@ -18,6 +18,6 @@
   "homepage": "https://github.com/JeremiePr/altimaps#readme",
   "dependencies": {
     "jquery": "^3.4.1",
-    "npm": "^6.11.3"
+    "npm": "^6.14.6"
   }
 }
